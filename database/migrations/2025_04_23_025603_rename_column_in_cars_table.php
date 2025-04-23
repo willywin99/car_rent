@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->foreign('car_id')->references('car_id')->on('cars');
+        Schema::table('cars', function (Blueprint $table) {
+            $table->renameColumn('double', 'day_rate');
+            $table->renameColumn('id', 'car_id');
         });
     }
 
@@ -21,8 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->dropForeign('orders_car_id_foreign');
+        Schema::table('cars', function (Blueprint $table) {
+            $table->renameColumn('day_rate', 'double');
+            $table->renameColumn('car_id', 'id');
         });
     }
 };

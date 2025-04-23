@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Car;
+use App\Models\Order;
 
-// class CarController extends Controller
+// class OrderController extends Controller
 // {
 //     /**
 //      * Display a listing of the resource.
@@ -48,28 +48,28 @@ use App\Models\Car;
 //     }
 // }
 
-class CarController extends Controller
+class OrderController extends Controller
 {
     public function index() {
-        return Car::all();
+        return Order::with('car')->get();
     }
 
     public function store(Request $request) {
-        return Car::create($request->all());
+        return Order::create($request->all());
     }
 
     public function show($id) {
-        return Car::findOrFail($id);
+        return Order::with('car')->findOrFail($id);
     }
 
     public function update(Request $request, $id) {
-        $car = Car::findOrFail($id);
-        $car->update($request->all());
-        return $car;
+        $order = Order::findOrFail($id);
+        $order->update($request->all());
+        return $order;
     }
 
     public function destroy($id) {
-        Car::destroy($id);
+        Order::destroy($id);
         return response()->json(['message' => 'Deleted']);
     }
 }

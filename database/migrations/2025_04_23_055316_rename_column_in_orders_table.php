@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('cars', function (Blueprint $table) {
-            $table->renameColumn('double', 'day_rate');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->renameColumn('id', 'order_id');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('cars', function (Blueprint $table) {
-            $table->renameColumn('day_rate', 'double');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->renameColumn('order_id', 'id');
         });
     }
 };
